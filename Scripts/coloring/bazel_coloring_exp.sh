@@ -4,6 +4,8 @@ if [ ! -e resp ]; then
     mkdir resp
 fi;
 
+export PARLAY_NUM_THREADS=12
+
 RESPDIR=/home/arthur/Desktop/Desamparado/Scripts/resp
 EXPDIR=/home/arthur/Desktop/Desamparado/Instancias/Coloring/exp
 GBBSCONV=to_gbbs.py
@@ -31,7 +33,7 @@ for file in $EXPDIR/*.col; do
         echo "-- Solver:$solver --" >> $solver.sol
         echo "-- $k-Coloring --" >> $solver.sol
 
-        ./$solver --relaxed $nome.cnf  >> $solver.sol 2>&1
+        ./$solver $nome.cnf  >> $solver.sol 2>&1
         echo "$solver started"
 
         out=$(python3 verify.py col $file $solver.sol -k $k)

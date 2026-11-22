@@ -60,7 +60,7 @@ def read_gbbs_sol(file):
                 k = int(line.split()[2])
                 continue
 
-            if line.startswith('#') : break
+            if line.startswith('#') or line.startswith('--'): break
 
             no, cor = list(map(int, line.split()))
             sol[no] = cor
